@@ -2,6 +2,13 @@
 
 - include: map.yml
 
-- name: hello_world
-  debug:
-    msg: "Hello World !!!"
+- name: install
+  package:
+    name: '{{ zabbix-agent.package }}'
+    state: present
+
+- name: enable and start
+  service:
+    name: "{{ zabbix-agent.service }}"
+    state: started
+    enable: true
