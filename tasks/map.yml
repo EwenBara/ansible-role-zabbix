@@ -1,0 +1,27 @@
+---
+
+- name: load variables
+  include_vars:
+    file: "{{ map }}.yml"
+    name: "{{ map }}"
+  loop:
+    - default
+    - osfamilymap
+    - distributionmap
+    - fingerprintmap
+  loop_control:
+    loop_var: map
+
+- name: compute fingerprint
+  set_fact:
+    ansible_fingerprint: "{{ ansible_distribution+(ansible_distribution_major_version != 'NA') | ternary(ansible_distribution_major_version, '') }}"
+
+- name: compute configuration
+  set_fact:
+    zabbix-agent: "{{ default.zabbix-agent | default({}) | combine(
+      osfamilymap[ansible_os_family].zabbix-agent is defined | ternary(osfamilymap[ansible_os_family].zabbix-agent, {}),
+      distributionmap[ansible_distribution].zabbix-agent is defined | ternary(distributionmap[ansible_distribution].zabbix-agent, {}),
+      fingerprintmap[ansible_fingerprint].zabbix-agent is defined | ternary(fingerprintmap[ansible_fingerprint].zabbix-agent, {}),
+      zabbix-agent | default({}),
+      recursive=True
+      ) }}"
