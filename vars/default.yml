@@ -4,3 +4,5 @@ zabbix:
   agent:
     package: zabbix-agent
     service: zabbix-agent
+  config:
+    server: 127.0.0.1
