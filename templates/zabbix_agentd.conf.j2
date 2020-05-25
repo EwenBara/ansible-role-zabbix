@@ -309,7 +309,7 @@ Hostname=Zabbix server
 # Mandatory: no
 # Default:
 # UserParameter=
-{% for UserParameter in zabbix.agent.config.UserParameter %}
+{% for UserParameter in zabbix.agent.config.UserParameter | default([]) %}
 UserParameter={{ UserParameter }}
 {% endfor %}
 
