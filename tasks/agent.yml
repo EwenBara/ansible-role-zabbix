@@ -2,20 +2,21 @@
 
 - include: map.yml
 
-- name: install
+- name: install agent
   package:
     name: '{{ zabbix.agent.package }}'
     state: present
 
-- name: configure
+- name: configure agent
   template:
     src: zabbix_agentd.conf.j2
     dest: /etc/zabbix/zabbix_agentd.conf
     owner: zabbix-agent
     group: zabbix-agent
     mode: '0644'
+  notify: restart agent
 
-- name: enable and start
+- name: enable and start agent
   service:
     name: "{{ zabbix.agent.service }}"
     state: started
