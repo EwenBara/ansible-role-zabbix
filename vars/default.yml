@@ -1,5 +1,6 @@
 ---
 
-zabbix-agent:
-  package: zabbix-agent
-  service: zabbix-agentd
+zabbix:
+  agent:
+    package: zabbix-agent
+    service: zabbix-agent

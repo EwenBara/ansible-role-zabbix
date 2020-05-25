@@ -1,5 +1,8 @@
 ---
 - name: Converge
   hosts: all
-  roles:
-    - role: ansible-role-zabbix-agent
+  tasks:
+    - name: "Include zabbix-agent"
+      include_role:
+        name: "zabbix"
+        tasks_from: "agent"

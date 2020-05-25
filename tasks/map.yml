@@ -18,10 +18,10 @@
 
 - name: compute configuration
   set_fact:
-    zabbix-agent: "{{ default.zabbix-agent | default({}) | combine(
-      osfamilymap[ansible_os_family].zabbix-agent is defined | ternary(osfamilymap[ansible_os_family].zabbix-agent, {}),
-      distributionmap[ansible_distribution].zabbix-agent is defined | ternary(distributionmap[ansible_distribution].zabbix-agent, {}),
-      fingerprintmap[ansible_fingerprint].zabbix-agent is defined | ternary(fingerprintmap[ansible_fingerprint].zabbix-agent, {}),
-      zabbix-agent | default({}),
+    zabbix: "{{ default.zabbix | default({}) | combine(
+      osfamilymap[ansible_os_family].zabbix is defined | ternary(osfamilymap[ansible_os_family].zabbix, {}),
+      distributionmap[ansible_distribution].zabbix is defined | ternary(distributionmap[ansible_distribution].zabbix, {}),
+      fingerprintmap[ansible_fingerprint].zabbix is defined | ternary(fingerprintmap[ansible_fingerprint].zabbix, {}),
+      zabbix | default({}),
       recursive=True
       ) }}"
