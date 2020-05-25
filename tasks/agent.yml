@@ -9,7 +9,7 @@
 
 - name: configure
   template:
-    src: zabbix_agent.conf.j2
+    src: zabbix_agentd.conf.j2
     dest: /etc/zabbix/zabbix_agentd.conf
     owner: zabbix-agent
     group: zabbix-agent
