@@ -309,6 +309,9 @@ Hostname=Zabbix server
 # Mandatory: no
 # Default:
 # UserParameter=
+{% for UserParameter in zabbix.agent.config.UserParameter %}
+UserParameter={{ UserParameter }}
+{% endfor %}
 
 ####### LOADABLE MODULES #######
 
